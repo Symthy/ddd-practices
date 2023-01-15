@@ -8,15 +8,16 @@ import {
   Put,
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
+import { Comment } from './entity/comment';
 
 @Controller('comments')
 export class CommentController {
   constructor(private commentService: CommentService) {}
 
   @Post('/')
-  async create(@Param('content') content: string): Promise<void> {
-    await this.commentService.create({
-      content,
+  async create(@Param('content') content: string): Promise<Comment> {
+    return this.commentService.create({
+      comment: content,
     });
   }
 
